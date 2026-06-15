@@ -10,9 +10,6 @@ This repo is intended to be published with GitHub Pages:
 
 https://smaddinieni.github.io/Mastering-AGENTS.md--From-Coder-to-Agentic-Engineer/
 
-> [!NOTE]
-> If the link shows a 404, check the repository's GitHub Pages settings and make sure it is publishing from the `master` branch and the root folder.
-
 ## What Is Included
 
 - A home page with the full course curriculum
