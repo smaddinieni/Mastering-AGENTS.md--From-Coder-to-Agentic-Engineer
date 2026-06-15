@@ -49,33 +49,6 @@ https://smaddinieni.github.io/Mastering-AGENTS.md--From-Coder-to-Agentic-Enginee
     +-- agents-md-cheat-sheet.html
 ```
 
-## Run Locally
-
-No build step is required. This is a plain HTML and CSS site.
-
-Open `index.html` in a browser, or use a small local server:
-
-```bash
-python -m http.server 8000
-```
-
-Then open:
-
-```text
-http://localhost:8000
-```
-
-## GitHub Pages Setup
-
-To publish the site on GitHub Pages:
-
-1. Go to the repository settings on GitHub.
-2. Open **Pages**.
-3. Set **Source** to **Deploy from a branch**.
-4. Set **Branch** to `master`.
-5. Set the folder to `/ root`.
-6. Save and wait a few minutes for GitHub to publish the site.
-
 ## Simple Repo Description
 
 Static GitHub Pages course for learning how to write effective `AGENTS.md` files for AI coding agents.
