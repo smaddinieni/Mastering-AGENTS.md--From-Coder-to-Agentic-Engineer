@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 3: Writing Your First AGENTS.md File</title>
+  <meta name="description" content="Set up your first AGENTS.md file from scratch. Learn how to define build commands, off-limit paths, and custom rules for coding agents." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 3 of 7 - Beginner Track</div>
+  <h1>Lesson 3: Writing Your First AGENTS.md File</h1>
+  <p class="subtitle">A step-by-step hands-on guide for 54b4rn4th to build an AGENTS.md file from scratch in any codebase.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~15 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Hands-on
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-label">
+    <span>System Status</span>
+    <span>Lesson 3 / 7</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width: 40%;" id="progressBar"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">01 // First Principles</div>
+    <h2>How an Agent Sees Your Code</h2>
+    <p>
+      Hello, 54b4rn4th. To build a great AGENTS.md file, you must first understand how an AI agent operates. An AI agent is a program that reads files, decides on actions, and runs commands. It does not have human memory or project context when it starts a new session. It only knows what is in the codebase.
+    </p>
+    <p>
+      If you do not write down your instructions, the agent must guess. It might use the wrong tool, change the wrong files, or write code in a style you do not want. We write the AGENTS.md file to stop this guessing.
+    </p>
+    <p>
+      Let us build your first AGENTS.md file from scratch. Follow these four steps.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">02 // Step One</div>
+    <h2>Step 1: Find and Test the Build Command</h2>
+    <p>
+      An AI agent must be able to check if its code edits work. To do this, it needs to run your project build and test commands. We must find the exact command and write it down.
+    </p>
+    <p>
+      Look at your project root files. 
+    </p>
+    <ul>
+      <li>In a JavaScript project, open `package.json` and look at the `scripts` section.</li>
+      <li>In a Python project, check `pyproject.toml`, `Makefile`, or `requirements.txt`.</li>
+      <li>In a Rust project, you will likely use Cargo commands.</li>
+    </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">⚡</div>
+      <div class="callout-body">
+        <strong>Action for 54b4rn4th:</strong>
+        <p>Run the test or build command in your terminal before you write it down. Make sure it runs to completion with no errors. If the command fails for you, it will fail for the agent too.</p>
+      </div>
+    </div>
+
+    <p>
+      Once you find the correct command, write it under a header named `## Build &amp; Test Commands`. You must wrap the command in backticks. Backticks tell the agent that the text is a runnable command, not just general description.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Build &amp; Test Commands</span>
+
+Run the build to verify TypeScript compiles:
+<span class="token-code">`npm run build`</span>
+
+Run the unit tests:
+<span class="token-code">`npm test`</span></code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">03 // Step Two</div>
+    <h2>Step 2: Mark Protected Paths as Off-Limits</h2>
+    <p>
+      AI agents work very fast. They can search the workspace and edit multiple files in seconds. Sometimes, they might try to change files that they should not touch.
+    </p>
+    <p>
+      Identify the folders in your workspace that are:
+    </p>
+    <ul>
+      <li><strong>Auto-generated:</strong> Folders like `dist/`, `build/`, `out/`, or `public/bundle/`. If the agent edits these, the compiler will just overwrite the changes.</li>
+      <li><strong>Third-party dependencies:</strong> Folders like `node_modules/`, `vendor/`, or `.venv/`. Changing these directly will break package updates.</li>
+      <li><strong>Sensitive configurations:</strong> Special deployment scripts or environment files.</li>
+    </ul>
+
+    <div class="callout warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Protecting your files</strong>
+        <p>Write down these off-limit paths clearly. Tell the agent that it must never read, write, or change files in these paths. This keeps your build safe and clean.</p>
+      </div>
+    </div>
+
+    <p>
+      Create a section in your AGENTS.md named `## Constraints` or `## Protected Paths`. List these paths clearly.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Protected Paths</span>
+
+Do NOT read or modify any files in the following folders:
+<span class="token-bullet">-</span> `dist/` - this contains compiled production code
+<span class="token-bullet">-</span> `vendor/` - this contains third-party dependencies</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-label">04 // Step Three</div>
+    <h2>Step 3: Add Design Rules That Linters Cannot Catch</h2>
+    <p>
+      Remember the "Focus on the Unknown" principle from Lesson 2. Your agent can already read your config files, like `.eslintrc` or `tsconfig.json`. You do not need to write rules that are already enforced by your linter.
+    </p>
+    <p>
+      Instead, write style rules about your custom design choices. Ask yourself: "What would I tell a new developer on their first day?"
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card do">
+        <div class="card-tag">✅ Write Custom Patterns</div>
+        <h4>Design Guidelines</h4>
+        <ul>
+          <li>"Use the Fetch API instead of Axios."</li>
+          <li>"Always write tests in the same folder as the component."</li>
+          <li>"Use functional components for all new UI."</li>
+        </ul>
+      </div>
+      <div class="compare-card dont">
+        <div class="card-tag">❌ Avoid Linter Duplicates</div>
+        <h4>Redundant Rules</h4>
+        <ul>
+          <li>"Use 2 spaces for indentation." (Linter does this)</li>
+          <li>"Do not leave unused variables." (Linter does this)</li>
+          <li>"This is a React app." (Agent finds this in configs)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      Write these guidelines under a header named `## Code Style Guidelines`. Use simple bullet points. Keep each point short and easy to understand.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Code Style Guidelines</span>
+
+<span class="token-bullet">-</span> Prefer native browser APIs over external utility packages.
+<span class="token-bullet">-</span> Group business logic inside hook files rather than UI files.</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-label">05 // Step Four</div>
+    <h2>Step 4: Create and Test Your AGENTS.md File</h2>
+    <p>
+      Now, you are ready to create the file.
+    </p>
+    <ol>
+      <li>Create a new file called `AGENTS.md` at the root of your project workspace.</li>
+      <li>Copy your sections (Build &amp; Test, Protected Paths, and Code Style) into the file.</li>
+      <li>Save the file.</li>
+    </ol>
+    <p>
+      After creating the file, you should test how the agent reacts. Ask the agent to build the project. It should read your `AGENTS.md` file, locate the test command in backticks, and run it. If it does not, review your file formatting. Make sure the headers and backticks are clean.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">⚡</div>
+      <div>
+        <div class="quiz-title">Checkpoint Quiz</div>
+        <div class="quiz-subtitle">Answer the 3 questions below to test your understanding.</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>Hello, 54b4rn4th. What is the most basic truth about how an AI agent gets its instructions?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          It knows your project rules automatically through intuition.
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          It reads workspace config files and custom instructions (like AGENTS.md) to understand project rules.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          It searches the web for similar projects to guess how yours works.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          It only follows commands that you type in the chat pane.
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        🎉 Correct! An AI agent uses files in the workspace as its source of truth. Setting up AGENTS.md stops the agent from guessing.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        ❌ Incorrect. The agent does not have intuition or access to your thoughts. It reads configuration files and workspace instructions to understand rules.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>Why should you write executable build and test commands inside backticks in your AGENTS.md file?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          Markdown formatting requires backticks for all list items.
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">B</span>
+          Backticks tell the AI agent that the text is a runnable command, which stops it from guessing how to build the project.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">C</span>
+          It hides the commands from other developers.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          It changes the behavior of your terminal.
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        🎉 Correct! Putting commands in backticks makes it easy for the agent to find and run them directly in the terminal.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        ❌ Incorrect. Backticks do not hide commands or change terminal behavior. They format the text as code, which helps the agent identify executable actions.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>Which of these is a good rule to put in the Code Style section of your AGENTS.md file?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          "Use 2 spaces for indentation" (when Prettier already enforces it).
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">B</span>
+          "Write comments in your code."
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">C</span>
+          "Always use the Fetch API instead of Axios for network calls to keep the bundle small."
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          "Do not write bugs."
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        🎉 Correct! This is a custom architectural rule that linters cannot check automatically. It is a perfect fit for AGENTS.md.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        ❌ Incorrect. Indentation is checked by linters. "Write comments" and "Do not write bugs" are too generic to help an agent write correct code.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Great work! You have finished Lesson 3.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="0002-anatomy-of-agents-md.html" class="btn btn-secondary">&larr; Lesson 2</a>
+      <a href="../reference/agents-md-cheat-sheet.html" class="btn btn-secondary">Cheat Sheet</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
+      <a href="0004-monorepos-and-hierarchy.html" class="btn">Lesson 4 &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
+    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help.</p>
+  </div>
+
+</main>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Update progress bar (starts at 40%, increases to 100% after 3 answers)
+    const bar = document.getElementById('progressBar');
+    bar.style.width = (40 + totalAnswered * 20) + '%';
+
+    if (totalAnswered === 3) showScore();
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) msg.textContent = 'Perfect score! You are ready to write your first AGENTS.md file, 54b4rn4th!';
+    else if (total >= 2) msg.textContent = 'Good job, 54b4rn4th. Go over the questions you missed and try editing your first AGENTS.md.';
+    else msg.textContent = 'Let us review the steps again, 54b4rn4th. You will get it!';
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

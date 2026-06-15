@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6: Multi-Agent Orchestration</title>
+  <meta name="description" content="Learn how to manage multiple AI agents using scoped AGENTS.md files and role-based instructions to solve complex tasks." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 6 of 7 - Advanced Track</div>
+  <h1>Lesson 6: Multi-Agent Orchestration</h1>
+  <p class="subtitle">Learn how to divide complex tasks between a lead agent and specialized worker agents using role-based instructions and scoped AGENTS.md files, 54b4rn4th.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~15 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Advanced Track
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-label">
+    <span>System Status</span>
+    <span id="progressPercent">80%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width: 80%;" id="progressBar"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">01 // First Principles</div>
+    <h2>Why One Agent is Not Enough</h2>
+    <p>
+      Hello, 54b4rn4th. To understand multi-agent systems, we must look at the physical limits of how AI models process information. We can build our understanding from three basic facts.
+    </p>
+    
+    <h3>Fact 1: The Context Window is Limited</h3>
+    <p>
+      An AI agent has a set limit on how much text it can read and hold in memory at one time. This includes the rules of the project, all files it has read, the chat history, and the outputs of commands. In a large project, these files and logs quickly fill up the memory. When this happens, the agent starts to forget earlier instructions or slows down.
+    </p>
+
+    <h3>Fact 2: Generality Breeds Errors</h3>
+    <p>
+      If a single agent has to run tests, write database queries, design CSS stylesheets, and write project documentation all at once, its focus is split. It has to keep hundreds of rules active in its memory. This split focus leads to minor mistakes, skipped checks, and rules being ignored.
+    </p>
+
+    <h3>Fact 3: Smaller Tasks Need Less Context</h3>
+    <p>
+      If we extract a single task - like finding a bug in a database query - we do not need to know about the frontend styles or the build scripts. We only need the database files. By giving this small task to a clean, separate agent session with only the database files, the agent works faster, costs less, and makes fewer mistakes.
+    </p>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>First Principles Definition</strong>
+        <p>Multi-agent orchestration is the act of splitting one complex project goal into small, isolated tasks. A lead agent (orchestrator) directs the work, while specialized worker agents (subagents) carry out the single tasks.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">02 // Local Boundaries</div>
+    <h2>Scoped AGENTS.md Files</h2>
+    <p>
+      When the lead agent creates a worker agent to solve a task, how does the worker know the rules for that specific part of the code? This is where <strong>scoped AGENTS.md files</strong> come in.
+    </p>
+    <p>
+      Instead of having a single, massive AGENTS.md file at the root of your project that contains every rule for every folder, you can place smaller, scoped AGENTS.md files inside subdirectories.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">Project Directory Structure</div>
+        <div class="code-dots">
+          <div class="code-dot red"></div>
+          <div class="code-dot yellow"></div>
+          <div class="code-dot green"></div>
+        </div>
+      </div>
+      <pre>
+my-project/
+├── <span class="token-heading">AGENTS.md</span>                 <span class="token-comment"># Root file - global build rules and general info</span>
+├── frontend/
+│   ├── <span class="token-heading">AGENTS.md</span>             <span class="token-comment"># Scoped file - rules for CSS, React, and layout styling</span>
+│   └── main.jsx
+└── backend/
+    ├── <span class="token-heading">AGENTS.md</span>             <span class="token-comment"># Scoped file - rules for SQL, database keys, and API safety</span>
+    └── server.js
+      </pre>
+    </div>
+
+    <h3>How Worker Agents Use Scoped Files</h3>
+    <p>
+      When an agent starts a task in a specific directory (like the <code>backend/</code> folder), it reads the AGENTS.md file inside that folder. This local file acts as the source of truth for that worker.
+    </p>
+    <p>
+      This approach has three major benefits:
+    </p>
+    <ul>
+      <li><strong>No Distractions:</strong> The backend worker agent does not read frontend CSS rules. This saves context window space.</li>
+      <li><strong>Custom Build Commands:</strong> The backend worker can have a specific run command (like <code>npm run test:backend</code>) that is different from the global build command.</li>
+      <li><strong>Cleaner Code:</strong> You do not have to update a single huge file every time you change a local rule.</li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">03 // Instructions</div>
+    <h2>Designing Role-Based Instructions</h2>
+    <p>
+      To make worker agents work well, you must define clear roles. If you tell a worker agent "fix the bugs in the backend code", it is too vague. The agent will guess what to do.
+    </p>
+    <p>
+      Instead, design role-based instructions using four key parts:
+    </p>
+    <ol>
+      <li><strong>Role Name:</strong> Give the agent a job title (like <code>Database Optimizer</code> or <code>API Tester</code>). This sets the tone for how it acts.</li>
+      <li><strong>Clear Goal:</strong> State the exact problem the worker must solve.</li>
+      <li><strong>Tools and Scope:</strong> Explicitly state which folders the worker can read and write to, and what commands it can run.</li>
+      <li><strong>Boundaries:</strong> Tell the agent what it is NOT allowed to do (like modifying database schemas or changing main packages).</li>
+    </ol>
+
+    <div class="compare-grid">
+      <div class="compare-card dont">
+        <div class="card-tag">Poor Instruction</div>
+        <h4>Generic & Unbounded</h4>
+        <ul>
+          <li>Role: Helper Agent</li>
+          <li>Task: "Fix the slow database code."</li>
+          <li>No list of permitted tools or commands.</li>
+          <li>No limits on which files can be edited.</li>
+          <li>Result: The agent might refactor the entire database schema, breaking other backend features.</li>
+        </ul>
+      </div>
+      <div class="compare-card do">
+        <div class="card-tag">Good Instruction</div>
+        <h4>Role-Based & Scoped</h4>
+        <ul>
+          <li>Role: Database Optimizer</li>
+          <li>Task: "Find slow queries in backend/db/ and add indexes to speed them up."</li>
+          <li>Scope: "Only edit backend/db/queries.js. Do not edit database tables or schemas."</li>
+          <li>Command: Use <code>npm run db:benchmark</code> to test query speed.</li>
+          <li>Result: The agent solves the speed problem safely without touching other parts of the project.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">⚡</div>
+      <div>
+        <div class="quiz-title">Checkpoint Quiz</div>
+        <div class="quiz-subtitle">Answer the 3 questions below to check your understanding, 54b4rn4th.</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>Why should you divide a large programming task among multiple specialized agents instead of using a single agent?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          To run commands in parallel, which speeds up the local compiler.
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          To prevent the agent from running out of context window space and keep the agent focused on a single task.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          Because multiple agents do not require files to run commands.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          To bypass global project build rules.
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        🎉 Correct! Breaking down a task into specialized steps stops the agent from getting distracted and helps it fit all key information inside its context window.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        ❌ Incorrect. Parallel execution does not speed up the local compiler. The primary reason is to manage the context window and maintain focus on a single task.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>How does a scoped AGENTS.md file inside a subdirectory help a worker agent?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          It deletes all files in the other folders so the worker cannot see them.
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">B</span>
+          It provides local rules and commands for that specific folder, keeping the worker focused and saving context space.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">C</span>
+          It automatically runs tests on remote servers whenever code changes.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          It translates terminal commands from other operating systems.
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        🎉 Correct! Scoped AGENTS.md files contain local instructions that only apply to the worker's subdirectory, preventing context waste.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        ❌ Incorrect. Scoped files do not delete files or run tests on remote servers. They provide local rules and commands that keep the worker focused.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>Which of the following is a vital element when designing role-based instructions for a worker agent?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          Including generic and wide instructions so the agent can explore the whole project.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">B</span>
+          Writing the instructions in code files rather than using a prompt.
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">C</span>
+          Defining a clear role name, a specific task, explicit file boundaries, and tools.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          Telling the worker agent to ignore the lead agent's requests.
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        🎉 Correct! Providing a clear role name, a specific task, and explicit file/tool boundaries keeps the agent safe and focused on its target goal.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        ❌ Incorrect. Generic instructions lead to agent distraction. Safe and successful tasks require clear role names, specific tasks, and clear file and tool boundaries.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Great work! You have finished Lesson 6.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="0005-advanced-style-and-testing.html" class="btn btn-secondary">&larr; Lesson 5</a>
+      <a href="../reference/agents-md-cheat-sheet.html" class="btn btn-secondary">Cheat Sheet</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
+      <a href="0007-maintenance-and-best-practices.html" class="btn">Lesson 7 &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>🤖 <strong>Ask your agent anything about this lesson</strong></p>
+    <p>Feel free to ask followup questions in your chat pane, 54b4rn4th. Your teacher is here to help.</p>
+  </div>
+
+</main>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Update progress bar (starts at 80%, increases to 100% after 3 answers)
+    const bar = document.getElementById('progressBar');
+    let progress = 80 + (totalAnswered * 6.67);
+    if (totalAnswered === 3) {
+      progress = 100;
+    }
+    bar.style.width = progress + '%';
+    
+    // Update progress label text
+    const label = document.getElementById('progressPercent');
+    if (label) {
+      label.textContent = Math.round(progress) + '%';
+    }
+
+    if (totalAnswered === 3) showScore();
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) msg.textContent = 'Perfect score! You fully understand multi-agent orchestration, 54b4rn4th!';
+    else if (total >= 2) msg.textContent = 'Good job, 54b4rn4th. Review the questions you missed and proceed to the next lesson.';
+    else msg.textContent = 'Let us review the concepts again, 54b4rn4th. You can try the questions again in a new session!';
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

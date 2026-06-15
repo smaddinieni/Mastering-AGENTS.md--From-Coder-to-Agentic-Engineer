@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 7: Maintenance and Best Practices - Keep Your AGENTS.md Clean</title>
+  <meta name="description" content="Learn how to maintain your AGENTS.md file, keep it short, prevent stale rules, use the Meta-Tip, and avoid common pitfalls. Lesson 7 of 7." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 7 of 7 - Final Track</div>
+  <h1>Maintenance and Best Practices</h1>
+  <p class="subtitle">Keep your AGENTS.md file short, accurate, and powerful as your codebase grows.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~8 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      Advanced
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-container">
+    <div class="progress-label">
+      <span>Your progress</span>
+      <span id="progressPercent">90% Complete</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width: 90%;" id="progressBar"></div></div>
+  </div>
+
+  <!-- SECTION 1: KEEP IT SHORT -->
+  <div class="section">
+    <div class="section-label">Rule 1</div>
+    <h2>Keep the File Short and Focused</h2>
+    <p>
+      An AI coding agent reads your entire AGENTS.md file at the start of every session. If the file is too long, it wastes valuable context space. This makes the agent slow, increases API costs, and confuses its logic.
+    </p>
+    <p>
+      To prevent this, you must only list rules that the agent cannot find by looking at your code. Do not write long guides. Write simple, direct facts.
+    </p>
+    
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <div class="card-tag">Incorrect Approach</div>
+        <h4>Long and Redundant Rules</h4>
+        <ul>
+          <li>Explaining how the React framework works.</li>
+          <li>Adding long code snippets of normal helpers.</li>
+          <li>Adding rules that are checked by eslint files.</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <div class="card-tag">Correct Approach</div>
+        <h4>Short and Direct Guidelines</h4>
+        <ul>
+          <li>"Use standard CSS instead of Tailwind libraries."</li>
+          <li>"Never edit the /vendor folder."</li>
+          <li>"Run pnpm build to verify type safety."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PREVENT STALE RULES -->
+  <div class="section">
+    <div class="section-label">Rule 2</div>
+    <h2>Prevent Stale Rules and Commands</h2>
+    <p>
+      A stale rule is an instruction that does not match your codebase anymore. For example, if you change your test tool from Jest to Vitest, but you do not update the test command in your AGENTS.md file, the agent will try to run the old command. This leads to failures.
+    </p>
+    <p>
+      You must clean up your rules. Whenever you update your build tools, rename folders, or change your design patterns, you must update the AGENTS.md file immediately. Remove rules that are no longer valid.
+    </p>
+
+    <div class="callout">
+      <div class="callout-icon">!</div>
+      <div class="callout-body">
+        <strong>Warning about stale rules</strong>
+        <p>If the agent reads a stale command, it will waste attempts trying to run it. This wastes your time and breaks the automated build process.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE META-TIP -->
+  <div class="section">
+    <div class="section-label">The Meta-Tip</div>
+    <h2>Update Rules When Correcting the Agent</h2>
+    <p>
+      When pair programming with an agent, you will sometimes need to correct its behavior. For example, you might say, "Please do not use double quotes for imports, we use single quotes."
+    </p>
+    <p>
+      The agent will fix the issue in that chat session. But when you start a new session, it will forget this instruction and make the same mistake again.
+    </p>
+    <p>
+      <strong>The Meta-Tip:</strong> The moment you have to correct the agent for the same mistake twice, do not just type the fix in chat. Open your AGENTS.md file and add a simple rule.
+    </p>
+    
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-filename">AGENTS.md</span>
+        <span class="code-lang">Markdown</span>
+      </div>
+      <pre><span class="token-heading">## Code Style Rules</span>
+
+<span class="token-bullet">-</span> Always use single quotes for JS and TS imports.
+<span class="token-bullet">-</span> Keep all helper functions inside the utils folder.</pre>
+    </div>
+    
+    <p>
+      By doing this, you update the agent's memory for all future sessions. You teach it once, and it remembers forever, 54b4rn4th.
+    </p>
+  </div>
+
+  <!-- SECTION 4: COMMON PITFALLS -->
+  <div class="section">
+    <div class="section-label">Pitfalls</div>
+    <h2>Common Pitfalls to Avoid</h2>
+    <p>
+      Watch out for these common errors when writing and maintaining your rules:
+    </p>
+    <p>
+      <strong>1. Redundant Rules:</strong> Do not write rules that are already defined in config files. The agent can check files like package.json, tsconfig.json, and eslint configs. Let the files speak for themselves.
+    </p>
+    <p>
+      <strong>2. Soft Guidelines:</strong> Rules like "write clean code" or "be efficient" do not help. AI agents need concrete limits and details. Write "Keep functions under 50 lines" instead.
+    </p>
+    <p>
+      <strong>3. Too Many Rules:</strong> If your file gets longer than 100 lines, it is probably too long. Keep the list of rules small so the agent can prioritize them correctly.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">?</div>
+      <div>
+        <div class="quiz-title">Knowledge Review</div>
+        <div class="quiz-subtitle">Answer these 3 questions to complete the course, 54b4rn4th.</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>Why is it critical to keep your AGENTS.md file short and focused?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          Because agents cannot read files that are more than 50 lines long.
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          To avoid using too much context space and prevent the agent from getting confused.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          Because short files compile faster in the build pipeline.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          It is only for human benefit, since agents prefer longer files.
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        [CORRECT] Yes! A short file saves context space and keeps the agent focused on your unique rules.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        [INCORRECT] No. Agents can read long files, but they get confused more easily and it wastes context space. Keep it short.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>What is the main idea behind the "Meta-Tip"?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          Let the agent write all the rules automatically.
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">B</span>
+          When you correct the agent for the same mistake twice, add that correction to AGENTS.md.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">C</span>
+          Only write rules about metadata and tags.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          Use the chat window to store all your rules.
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        [CORRECT] Correct! Adding repeated chat corrections to AGENTS.md prevents the agent from making them again in new sessions.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        [INCORRECT] Incorrect. The Meta-Tip says you should write rules in AGENTS.md for any mistakes you find yourself correcting more than once.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>Which rule represents a common pitfall because it is redundant?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          "Do not modify files in the /archive directory."
+        </button>
+        <button class="option" onclick="manual_check(this,'q3','wrong')">
+          <span class="option-letter">B</span>
+          "Use our custom format helper in formatters.ts."
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">C</span>
+          "Use 2 spaces for indentation" (when your project already has a .prettierrc file enforcing it).
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          "Write clean, bug-free code."
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        [CORRECT] Correct! If a rule is already enforced by a tool like Prettier or ESLint, do not repeat it in AGENTS.md. The agent can read config files.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        [INCORRECT] Incorrect. If a rule is already enforced by config files (like Prettier), it is redundant to add it to AGENTS.md.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Excellent job, 54b4rn4th! You have mastered the rules of maintaining AGENTS.md.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="0006-multi-agent-orchestration.html" class="btn btn-secondary">&larr; Lesson 6</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+      <button class="btn" id="btnNext" onclick="showCongratsModal()" disabled>Course Complete</button>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
+    <p>Do you have questions about these best practices? Ask 54b4rn4th in the chat pane. Your agent is ready to help.</p>
+    <p class="sub-text">Remember to ask followup questions to the agent to refine your learning.</p>
+  </div>
+
+</main>
+
+<!-- CONGRATS MODAL -->
+<div class="modal-overlay" id="congratsModal">
+  <div class="modal">
+    <h2>Course Complete!</h2>
+    <div class="modal-line"></div>
+    <p>Congratulations, 54b4rn4th! You have finished all 7 lessons of the AGENTS.md beginner-to-pro course. You now know how to build, scale, and maintain agent-first codebases.</p>
+    <ul>
+      <li><span>Lesson 1: What is AGENTS.md</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 2: Anatomy & Structure</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 3: Your First AGENTS.md</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 4: Monorepos & Hierarchy</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 5: Advanced Custom Rules</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 6: Multi-Agent Systems</span> <span class="tag">Complete</span></li>
+      <li><span>Lesson 7: Best Practices</span> <span class="tag">Complete</span></li>
+    </ul>
+    <button class="btn-close" onclick="closeCongratsModal()">Finish</button>
+  </div>
+</div>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Calculate progress: starts at 90%, goes to 100% on 3rd answer.
+    const bar = document.getElementById('progressBar');
+    const label = document.getElementById('progressPercent');
+    
+    if (totalAnswered === 1) {
+      bar.style.width = '93.3%';
+      label.textContent = '93% Complete';
+    } else if (totalAnswered === 2) {
+      bar.style.width = '96.6%';
+      label.textContent = '96% Complete';
+    } else if (totalAnswered === 3) {
+      bar.style.width = '100%';
+      label.textContent = '100% Complete';
+      
+      // Enable the Course Complete button
+      const btnNext = document.getElementById('btnNext');
+      btnNext.removeAttribute('disabled');
+      
+      showScore();
+    }
+  }
+
+  // Backwards compatibility helper for typo in onclick handler
+  function manual_check(el, qId, result) {
+    answer(el, qId, result);
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) {
+      msg.textContent = 'Perfect score! You are ready to manage your project rules, 54b4rn4th. Click "Course Complete" below.';
+    } else if (total >= 2) {
+      msg.textContent = 'Good effort, 54b4rn4th. Review the rules you missed, then finish the course.';
+    } else {
+      msg.textContent = 'Please review the concepts and try again, 54b4rn4th.';
+    }
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function showCongratsModal() {
+    document.getElementById('congratsModal').style.display = 'flex';
+  }
+
+  function closeCongratsModal() {
+    document.getElementById('congratsModal').style.display = 'none';
+  }
+</script>
+</body>
+</html>

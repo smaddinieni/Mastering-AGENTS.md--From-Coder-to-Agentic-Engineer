@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 5: Advanced Style and Testing Rules</title>
+  <meta name="description" content="Master advanced rules for coding agents. Learn how to write style guides linters cannot catch, design test policies, create mock rules, and set up pull request templates." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 5 of 7 - Advanced Track</div>
+  <h1>Lesson 5: Advanced Style and Testing Rules</h1>
+  <p class="subtitle">A guide for 54b4rn4th to control agent style, write tests, handle mock files, and set commit conventions.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~15 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Advanced Guide
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-label">
+    <span>System Status: Loading Modules</span>
+    <span id="progressText">65%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width: 65%;" id="progressBar"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">01 // First Principles</div>
+    <h2>Why Advanced Rules Matter</h2>
+    <p>
+      Hello, 54b4rn4th. To master agent coordination, we must look at how an agent reads instructions. An agent is a tool that writes code based on context. It knows basic programming syntax, but it does not know your personal goals or design decisions.
+    </p>
+    <p>
+      Many developers think that a code linter is enough to keep a codebase clean. This is false. A linter checks basic syntax formatting, like missing semicolons or spaces. A linter cannot check if a test matches your mock files. It cannot check if the agent selected a bad library. It cannot check if a git commit message is clear.
+    </p>
+    <p>
+      We write advanced rules in our instructions to solve this problem. These rules direct the agent to make design and testing choices that match your expectations.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">02 // Custom Style Guidelines</div>
+    <h2>Rules Linters Cannot Catch</h2>
+    <p>
+      An agent will write code that runs, but the code may not fit your architecture. You must write rules for architectural patterns and library selections.
+    </p>
+    <p>
+      For example, if you do not want the agent to use external HTTP clients like Axios, you must write a rule. If you want the agent to write components using a specific file structure, you must explain that structure.
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card do">
+        <div class="card-tag">✅ Write Architecture Rules</div>
+        <h4>Design Guidelines</h4>
+        <ul>
+          <li>"Use native browser fetch instead of external packages."</li>
+          <li>"Put component logic in hooks files to keep UI files simple."</li>
+          <li>"Use CSS variables instead of inline styles."</li>
+        </ul>
+      </div>
+      <div class="compare-card dont">
+        <div class="card-tag">❌ Avoid Formatting Duplicates</div>
+        <h4>Redundant Rules</h4>
+        <ul>
+          <li>"Use tabs for formatting." (Linters do this)</li>
+          <li>"Add a semicolon at the end of each statement." (Linters do this)</li>
+          <li>"Export every function." (Syntax checks do this)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      Write these design rules under a header in your instructions file. Focus on code structure and library limits.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Architecture &amp; Library Rules</span>
+
+<span class="token-bullet">-</span> Use native Web APIs whenever possible.
+<span class="token-bullet">-</span> Avoid installing new dependencies without asking first.
+<span class="token-bullet">-</span> Split files if they grow larger than 200 lines of code.</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">03 // Testing Strategies</div>
+    <h2>Testing Rules and Strategies</h2>
+    <p>
+      When an agent edits code, it must verify its changes. If you do not specify how to write and run tests, the agent will write tests that do not match your testing pattern.
+    </p>
+    <p>
+      You must instruct the agent on where test files live, how to name them, and what tool to use to run them.
+    </p>
+
+    <div class="callout tip">
+      <div class="callout-icon">🧪</div>
+      <div class="callout-body">
+        <strong>Action for 54b4rn4th:</strong>
+        <p>Tell the agent exactly what to test. For example, state that every new utility function must have a unit test file in the same folder as the utility file.</p>
+      </div>
+    </div>
+
+    <p>
+      Create a testing rule block that contains the test runner command and file naming rules:
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Testing Rules</span>
+
+<span class="token-bullet">-</span> Put test files in the same folder as the source file.
+<span class="token-bullet">-</span> Name test files `[filename].test.ts`.
+<span class="token-bullet">-</span> Run tests using `npm run test` after making any edits.</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-label">04 // Mock Guidelines</div>
+    <h2>Mocking Guidelines</h2>
+    <p>
+      Mocks are fake objects that simulate real services. Mocks help run tests quickly without calling live external databases or network links.
+    </p>
+    <p>
+      If an agent writes custom mocks for every test, it will create fragile tests. Fragile tests break when you make simple changes to the project.
+    </p>
+    <p>
+      To prevent fragile tests, write clear rules about mock styles:
+    </p>
+    <ul>
+      <li>State which libraries the agent must use for mocking (for example, Mock Service Worker for API calls).</li>
+      <li>Tell the agent to clean up mock states after each test run.</li>
+      <li>Prevent the agent from mocking internal helper functions. Mocks should only be used for external boundaries.</li>
+    </ul>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Mocking Guidelines</span>
+
+<span class="token-bullet">-</span> Use Mock Service Worker (MSW) for API mock tests. Do not mock fetch manually.
+<span class="token-bullet">-</span> Reset mock handlers after each test using `afterEach(() => server.resetHandlers())`.
+<span class="token-bullet">-</span> Do not mock internal business logic or helper utilities.</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-label">05 // PR and Commit Templates</div>
+    <h2>Automating Commits and Pull Requests</h2>
+    <p>
+      An agent works fast and makes many changes. If the agent makes commits with unclear messages, human developers cannot review the project history.
+    </p>
+    <p>
+      To fix this, write rules that force the agent to use a template for git commits and Pull Requests (PRs). Use the Conventional Commits format to make changes easy to read.
+    </p>
+
+    <div class="callout info">
+      <div class="callout-icon">📝</div>
+      <div class="callout-body">
+        <strong>Structuring Commits:</strong>
+        <p>A template tells the agent to list the issue title, the files modified, and the test results. This makes it easy for you to review and merge changes.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="code-dot red"></span>
+          <span class="code-dot yellow"></span>
+          <span class="code-dot green"></span>
+        </div>
+        <span class="code-filename">Drafting AGENTS.md</span>
+      </div>
+      <pre><code><span class="token-heading">## Commit &amp; PR Guidelines</span>
+
+Use this commit format:
+`[type]: [short summary]`
+
+Types:
+- `feat` (new features)
+- `fix` (bug fixes)
+- `test` (adding tests)
+
+PR descriptions must include:
+1. Problem description
+2. Solution description
+3. Test commands executed</code></pre>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">⚡</div>
+      <div>
+        <div class="quiz-title">Checkpoint Quiz</div>
+        <div class="quiz-subtitle">Answer the 3 questions below to test your understanding.</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>Hello, 54b4rn4th. Why do we need custom style rules if we already have a code linter?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          Linters are slow and make it difficult for the agent to write code.
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          Linters only check basic syntax and formatting, but they cannot verify design choices, library preferences, or architectural layers.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          Linters can only check code written in Python.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          Linters do not work when you use an AI agent.
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        🎉 Correct! Linters check syntax and style formatting. They cannot enforce higher-level design choices or libraries you prefer the agent to use.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        ❌ Incorrect. Linters check syntax and basic style. You need advanced rules to teach the agent about your design decisions, library choices, and architectural layers.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>What is the best way to guide an agent when it needs to mock external services in tests?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          Tell the agent to mock everything and never run tests against real databases.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">B</span>
+          Do not allow the agent to write any mocks at all.
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">C</span>
+          Provide clear guidelines in your rules, such as using MSW (Mock Service Worker) for API calls, and define where mock files must live.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          Let the agent write mocks in whatever style it chooses.
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        🎉 Correct! Giving the agent specific mock guidelines (like using MSW) prevents it from writing inconsistent, fragile, or incorrect mocks.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        ❌ Incorrect. Leaving mocking style to the agent's choice leads to fragile, hard-to-maintain tests. Specific mock guidelines ensure clean and consistent test setups.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>How does a commit and PR template in your instructions help you work with an agent?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          It stops the agent from making commits entirely.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">B</span>
+          It changes how Git stores commits on your computer.
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">C</span>
+          It ensures the agent writes clean, structured commit messages and descriptions that make human review easy.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          It lets the agent bypass your CI build pipelines.
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        🎉 Correct! A commit and PR template gives the agent a clear format to follow. This makes it easy for humans to review the changes.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        ❌ Incorrect. A template ensures consistent, structured commit messages and PR descriptions. This helps human developers review agent work quickly.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Great work! You have finished Lesson 5.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="0004-monorepos-and-hierarchy.html" class="btn btn-secondary">&larr; Lesson 4</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
+      <a href="0006-multi-agent-orchestration.html" class="btn">Lesson 6 &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
+    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help.</p>
+  </div>
+
+</main>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Update progress bar (starts at 65%, increases to 100% after 3 answers)
+    const bar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const pct = Math.round(65 + totalAnswered * 11.66);
+    bar.style.width = pct + '%';
+    progressText.textContent = pct + '%';
+
+    if (totalAnswered === 3) showScore();
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) msg.textContent = 'Perfect score, 54b4rn4th! You have mastered advanced style and testing rules!';
+    else if (total >= 2) msg.textContent = 'Good work, 54b4rn4th. You understand most of the concepts. Review the one you missed.';
+    else msg.textContent = 'Let us try again, 54b4rn4th. Review the sections above and test your knowledge again.';
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

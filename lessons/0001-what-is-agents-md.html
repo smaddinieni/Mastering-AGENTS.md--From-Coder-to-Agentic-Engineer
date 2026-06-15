@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 1: What is AGENTS.md and Why Does It Exist?</title>
+  <meta name="description" content="Learn why AGENTS.md exists, what problem it solves, and how it is different from README.md. Lesson 1 of the AGENTS.md beginner-to-pro course." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 1 of 7 &mdash; Beginner Track</div>
+  <h1>What is AGENTS.md, and Why Does It Exist?</h1>
+  <p class="subtitle">The foundation. Understand the problem it solves before you write a single line.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~10 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Beginner
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-label">
+    <span>Your progress</span>
+    <span>Lesson 1 / 7</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width: 14%;" id="progressBar"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">The Problem</div>
+    <h2>Every time you start a new session, the agent forgets everything</h2>
+    <p>
+      AI coding agents like Antigravity, Cursor, Copilot, and Claude Code are powerful - but by default they know nothing about <em>your</em> project. Every new session is a blank slate.
+    </p>
+    <p>
+      This means you end up repeating yourself. You type things like:
+    </p>
+    <ul style="list-style:none;padding:0;margin:0 0 14px;">
+      <li style="padding:6px 0;display:flex;gap:10px;color:#7b849a;font-size:14px;"><span style="color:#f87171">✗</span> "By the way, we use TypeScript strict mode..."</li>
+      <li style="padding:6px 0;display:flex;gap:10px;color:#7b849a;font-size:14px;"><span style="color:#f87171">✗</span> "Don't touch the /vendor folder..."</li>
+      <li style="padding:6px 0;display:flex;gap:10px;color:#7b849a;font-size:14px;"><span style="color:#f87171">✗</span> "We always run <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--yellow)">npm test</code> before committing..."</li>
+      <li style="padding:6px 0;display:flex;gap:10px;color:#7b849a;font-size:14px;"><span style="color:#f87171">✗</span> "Our naming convention is camelCase for functions, PascalCase for classes..."</li>
+    </ul>
+    <p>
+      This is friction. It wastes your time and the agent gets it wrong because you forgot to mention it.
+    </p>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>The core idea</strong>
+        <p>AGENTS.md is a file you put in your project that answers all these "by the way" questions upfront - permanently. The agent reads it at the start of every session.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">What It Is</div>
+    <h2>AGENTS.md is a README for machines</h2>
+    <p>
+      You already know what a <strong>README.md</strong> is - it is a file that explains your project to <em>humans</em>. It covers what the project does, how to install it, and how to contribute.
+    </p>
+    <p>
+      <strong>AGENTS.md does the same thing, but for AI agents.</strong> It is written in plain Markdown and lives in the root of your repository. When an agent starts working on your project, it reads this file first.
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card human">
+        <div class="card-tag">&#128100; README.md</div>
+        <h4>For humans</h4>
+        <ul>
+          <li>What this project does</li>
+          <li>Installation steps</li>
+          <li>Contribution guidelines</li>
+          <li>License information</li>
+          <li>Screenshots, demos</li>
+        </ul>
+      </div>
+      <div class="compare-card agent">
+        <div class="card-tag">&#129302; AGENTS.md</div>
+        <h4>For AI agents</h4>
+        <ul>
+          <li>Exact build &amp; test commands</li>
+          <li>Code style rules to follow</li>
+          <li>Files to never touch</li>
+          <li>How to run the test suite</li>
+          <li>Project-specific conventions</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      They are kept separate by design. You do not want to bloat your README with machine-specific instructions that confuse human contributors.
+    </p>
+
+    <div class="callout tip">
+      <div class="callout-icon">✅</div>
+      <div class="callout-body">
+        <strong>Used by 60,000+ open-source projects</strong>
+        <p>AGENTS.md is an open standard - not owned by any company. It works with Antigravity, Cursor, Copilot, Aider, Windsurf, Zed, Devin, and many more. (Note: Claude Code uses a similar file named CLAUDE.md). Source: <a href="https://agents.md" style="color:#4ade80">agents.md</a></p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">Compatible Tools</div>
+    <h2>One file, works across all major agents</h2>
+    <p>Write it once. Every agent that supports AGENTS.md will read it automatically:</p>
+    <div class="agent-grid">
+      <span class="agent-chip">&#129302; Antigravity</span>
+      <span class="agent-chip">&#9654; Cursor</span>
+      <span class="agent-chip">&#129351; GitHub Copilot</span>
+      <span class="agent-chip">&#127760; Claude Code (uses CLAUDE.md)</span>
+      <span class="agent-chip">&#128301; OpenAI Codex</span>
+      <span class="agent-chip">&#127757; Google Jules</span>
+      <span class="agent-chip">&#128187; VS Code (Copilot Agent)</span>
+      <span class="agent-chip">&#128640; Windsurf</span>
+      <span class="agent-chip">&#127381; Aider</span>
+      <span class="agent-chip">&#129461; Devin</span>
+      <span class="agent-chip">&#9889; Zed</span>
+      <span class="agent-chip">&#128039; Goose</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-label">How It Works</div>
+    <h2>The agent reads it before it does anything</h2>
+    <p>Here is the order of events when you start a session with an AI coding agent that supports AGENTS.md:</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>1. You open your project and ask the agent something</h4>
+        <p>"Add a dark mode toggle to the settings page"</p>
+      </div>
+      <div class="timeline-item">
+        <h4>2. The agent looks for AGENTS.md in the project root</h4>
+        <p>If it finds one, it reads every instruction in it - before doing anything else</p>
+      </div>
+      <div class="timeline-item">
+        <h4>3. The agent now knows your rules</h4>
+        <p>It knows your code style, your test commands, what files to avoid, and your naming conventions</p>
+      </div>
+      <div class="timeline-item">
+        <h4>4. The agent gets to work - correctly, first time</h4>
+        <p>No "by the way" needed. It follows your project rules automatically</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-icon">&#9888;&#65039;</div>
+      <div class="callout-body">
+        <strong>Important: Monorepos have a hierarchy</strong>
+        <p>In a monorepo (one big repo with multiple sub-projects), you can have an AGENTS.md in the root AND in subdirectories. The agent uses the file closest to where it is working. We will cover this in Lesson 4.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-label">First Look</div>
+    <h2>What does one actually look like?</h2>
+    <p>Below is the simplest possible AGENTS.md - a minimal but real example:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-filename">AGENTS.md</span>
+        <span class="code-lang">MARKDOWN</span>
+      </div>
+      <pre><span class="token-heading"># AGENTS.md</span>
+
+<span class="token-heading">## Setup commands</span>
+<span class="token-bullet">-</span> Install deps: <span class="token-code">`pnpm install`</span>
+<span class="token-bullet">-</span> Start dev server: <span class="token-code">`pnpm dev`</span>
+<span class="token-bullet">-</span> Run tests: <span class="token-code">`pnpm test`</span>
+
+<span class="token-heading">## Code style</span>
+<span class="token-bullet">-</span> TypeScript strict mode
+<span class="token-bullet">-</span> Single quotes, no semicolons
+<span class="token-bullet">-</span> Functional patterns where possible
+
+<span class="token-heading">## Never touch these</span>
+<span class="token-bullet">-</span> <span class="token-code">/vendor/</span> and <span class="token-code">/generated/</span> directories
+<span class="token-bullet">-</span> Any file ending in <span class="token-code">*.generated.ts</span></pre>
+    </div>
+
+    <p>That is it. Plain Markdown. No special syntax. No YAML frontmatter. Just clear instructions organised into sections.</p>
+
+    <div class="anatomy">
+      <div class="anatomy-header">Anatomy of the example above</div>
+      <div class="anatomy-row">
+        <div class="anatomy-line"><span class="token-heading"># AGENTS.md</span></div>
+        <div class="anatomy-explain">The file title - tells the agent (and humans) what this file is for</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-line"><span class="token-heading">## Setup commands</span></div>
+        <div class="anatomy-explain">A section heading - <em>agents read sections like chapters, so label them clearly</em></div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-line"><span class="token-bullet">-</span> Run tests: <span class="token-code">`pnpm test`</span></div>
+        <div class="anatomy-explain">Exact command in backticks - <em>always use the exact runnable command, not a description of it</em></div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-line"><span class="token-bullet">-</span> TypeScript strict mode</div>
+        <div class="anatomy-explain">A code rule - <em>only rules that deviate from the default or can't be inferred from the code</em></div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-line"><span class="token-code">/vendor/</span> and <span class="token-code">/generated/</span></div>
+        <div class="anatomy-explain">Protected paths - <em>the most important constraint to define clearly - what to never modify</em></div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">&#127981;</div>
+      <div>
+        <div class="quiz-title">Quick Check</div>
+        <div class="quiz-subtitle">3 questions - instant feedback on each one</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>What is the main problem that AGENTS.md is designed to solve?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          Replacing the README.md so there is only one documentation file
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          Giving AI agents persistent, project-specific context they would otherwise forget between sessions
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          Defining environment variables for the build pipeline
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          Replacing tool-specific files like .cursorrules forever
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        &#127881; Exactly right. AGENTS.md gives the agent information it can't infer from the code - things you would otherwise repeat at the start of every session.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        &#10060; Not quite. AGENTS.md complements README.md - it does not replace it. And while it can reduce the need for tool-specific files, the core purpose is giving agents persistent project context.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>You are starting a new project. Where should AGENTS.md be placed?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          Inside the <code style="font-family:'JetBrains Mono',monospace;font-size:12px">.github/</code> folder alongside CI config
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">B</span>
+          In the <code style="font-family:'JetBrains Mono',monospace;font-size:12px">docs/</code> folder with other documentation
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">C</span>
+          The root of the repository, alongside README.md
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          Anywhere - agents automatically scan the whole repository for it
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        &#127881; Correct. The root of the repo is the standard, predictable place. Agents know to look there first. In monorepos you can also add them to subdirectories for scoped rules.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        &#10060; Not quite. AGENTS.md belongs in the repository root - the same level as README.md. That is the standard place agents are built to look for it.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>Which of these belongs in AGENTS.md?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          A description of what the project does for new contributors
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">B</span>
+          A linting rule that is already enforced by ESLint config in the repo
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">C</span>
+          The exact command to run the test suite, e.g. <code style="font-family:'JetBrains Mono',monospace;font-size:12px">pnpm test</code>
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          The agent's persona, e.g. "You are an expert software engineer"
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        &#127881; Perfect. Exact runnable commands are the most valuable thing to put in AGENTS.md. Option A belongs in README, Option B is already enforced by tooling so it's redundant, Option D is redefining the agent's core persona - which AGENTS.md is not for.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        &#10060; Not quite. The key principle is: only include things the agent cannot infer from the codebase or that aren't already enforced by your tooling. Exact commands are perfect examples. Project descriptions belong in README. Persona redefinition is off-scope.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Perfect score! You're ready for Lesson 2.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="../reference/agents-md-cheat-sheet.html" class="btn btn-secondary">Cheat Sheet</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+      <a href="0002-anatomy-of-agents-md.html" class="btn">Lesson 2 &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>&#129302; <strong>Ask your agent anything</strong> about this lesson</p>
+    <p>Just type your question in the Antigravity chat. Your teacher is always on.</p>
+  </div>
+
+</main>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Update progress bar slightly
+    const bar = document.getElementById('progressBar');
+    bar.style.width = (14 + totalAnswered * 5) + '%';
+
+    if (totalAnswered === 3) showScore();
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) msg.textContent = 'Perfect score! You fully understand the foundation. On to Lesson 2.';
+    else if (total >= 2) msg.textContent = 'Good work. Revisit the questions you missed, then move to Lesson 2.';
+    else msg.textContent = 'Re-read the lesson and try again - the concepts will click quickly.';
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

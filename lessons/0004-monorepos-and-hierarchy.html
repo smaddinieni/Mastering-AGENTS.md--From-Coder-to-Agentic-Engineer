@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 4: Monorepos and Hierarchy</title>
+  <meta name="description" content="Master how AI agents search the directory tree for rules and how nested AGENTS.md files override root instructions in monorepos." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Lesson 4 of 7 - Intermediate Track</div>
+  <h1>Lesson 4: Monorepos and Hierarchy</h1>
+  <p class="subtitle">Understand how AI agents search the directory tree for rules, and how nested AGENTS.md files override root instructions, tailored for 54b4rn4th.</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ~12 min read
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      3 quiz questions
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Architecture Focus
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="progress-label">
+    <span>System Status</span>
+    <span>Lesson 4 / 7</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width: 50%;" id="progressBar"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">01 // First Principles</div>
+    <h2>How Agents Search the Directory Tree</h2>
+    <p>
+      Hello, 54b4rn4th. When an AI agent performs tasks in your workspace, it needs to find context and rules. It does not just look in the workspace root folder. It searches your directory structure dynamically.
+    </p>
+    <p>
+      Let us explain this using first principles. An agent always works from a current directory. When it starts a task or runs a command:
+    </p>
+    <ol>
+      <li>It checks the current working folder for an <code class="tree-accent">AGENTS.md</code> file.</li>
+      <li>If it does not find one, it moves up to the parent directory and checks again.</li>
+      <li>It repeats this process, walking up the tree, until it reaches the root of your workspace.</li>
+    </ol>
+    
+    <div class="tree-visualizer">
+      <div class="tree-line"><span class="tree-accent">workspace-root/</span> <span class="tree-comment">// Stop here (checks third)</span></div>
+      <div class="tree-line">├── AGENTS.md</div>
+      <div class="tree-line">└── apps/ <span class="tree-comment">// Checks second</span></div>
+      <div class="tree-line">    └── web-app/ <span class="tree-comment">// Checks first (agent working folder)</span></div>
+      <div class="tree-line">        ├── AGENTS.md</div>
+      <div class="tree-line">        └── src/</div>
+      <div class="tree-line">            └── <span class="tree-search-step">main.ts</span> <span class="tree-comment">&lt;-- Agent edits this file</span></div>
+    </div>
+
+    <p>
+      By walking up the directory tree, the agent reads all instructions along the path. It combines them to build its final instruction set.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">02 // Specificity and Overrides</div>
+    <h2>Subdirectory Rules Override Root Rules</h2>
+    <p>
+      Sometimes, you might have conflicting instructions in different directories.
+    </p>
+    <p>
+      In these cases, the rule of specificity applies: <strong>a rule in a subdirectory AGENTS.md overrides a conflicting rule in a parent or root AGENTS.md</strong>.
+    </p>
+    <p>
+      This is extremely useful. It lets you write general rules for your whole workspace while keeping project-specific commands and rules separate.
+    </p>
+
+    <div class="cyber-panel">
+      <h3>The Override Process</h3>
+      <p>
+        Imagine your root <code class="tree-accent">AGENTS.md</code> contains:
+      </p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-filename">./AGENTS.md (Root)</span>
+        </div>
+        <pre><code><span class="token-heading">## Build &amp; Test Commands</span>
+<span class="token-code">`npm run build`</span></code></pre>
+      </div>
+      <p>
+        But you have a Python service in <code class="tree-accent">./services/backend/</code> with its own <code class="tree-accent">AGENTS.md</code>:
+      </p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-filename">./services/backend/AGENTS.md</span>
+        </div>
+        <pre><code><span class="token-heading">## Build &amp; Test Commands</span>
+<span class="token-code">`poetry run pytest`</span></code></pre>
+      </div>
+      <p>
+        When the agent works inside <code class="tree-accent">./services/backend/</code>, it uses <code class="token-code">`poetry run pytest`</code> to verify its changes instead of the root build command. The local file overrides the root command completely.
+      </p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">03 // Monorepos</div>
+    <h2>Best Practices for Monorepo Hierarchy</h2>
+    <p>
+      In a monorepo setup, you have multiple sub-projects inside one repository. If you put all rules for every service in a single root file, the file will become massive and confusing.
+    </p>
+    <p>
+      Use these rules to design a clean hierarchy:
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card do">
+        <div class="card-tag">✅ Clean Hierarchy</div>
+        <h4>How to structure rules</h4>
+        <ul>
+          <li>Put global rules in the root file (such as your user name 54b4rn4th, styling principles, or off-limit paths).</li>
+          <li>Put service-specific build and test commands in each service subdirectory.</li>
+          <li>Define framework-specific style guides (like React vs NestJS) in the subdirectory where they are used.</li>
+        </ul>
+      </div>
+      <div class="compare-card dont">
+        <div class="card-tag">❌ Bad Practices</div>
+        <h4>What to avoid</h4>
+        <ul>
+          <li>Do not copy and paste the same full file into every folder. That makes updates painful.</li>
+          <li>Do not write frontend rules in the backend directory. Keep them separated.</li>
+          <li>Do not force one global test command if services use different build tools.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-icon">⚡</div>
+      <div>
+        <div class="quiz-title">Checkpoint Quiz</div>
+        <div class="quiz-subtitle">Answer the 3 questions below to test your understanding, 54b4rn4th.</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <div class="quiz-number">Question 1 of 3</div>
+      <p>How do AI agents search for AGENTS.md instruction files in a workspace?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">A</span>
+          They only look at the exact root directory of the operating system.
+        </button>
+        <button class="option" onclick="answer(this,'q1','correct')" data-q="q1">
+          <span class="option-letter">B</span>
+          They start in the current working directory, then check each parent directory up to the workspace root.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">C</span>
+          They run a background script that scans the entire hard drive for all markdown files.
+        </button>
+        <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
+          <span class="option-letter">D</span>
+          They only read files that you explicitly drag and drop into the chat.
+        </button>
+      </div>
+      <div class="feedback correct" id="q1-correct">
+        🎉 Correct! The agent searches from its current location and walks up parent folders. This lets it read both local and global rules.
+      </div>
+      <div class="feedback wrong" id="q1-wrong">
+        ❌ Incorrect. The agent does not scan the whole hard drive or look only at the OS root. It searches up from its current working directory to the workspace root.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <div class="quiz-number">Question 2 of 3</div>
+      <p>If a root AGENTS.md and a subdirectory AGENTS.md have conflicting build instructions, which one will the agent use in that subdirectory?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">A</span>
+          The root file instructions, because they are at the top level of the repository.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">B</span>
+          Neither. The agent will show an error and stop working immediately.
+        </button>
+        <button class="option" onclick="answer(this,'q2','correct')" data-q="q2">
+          <span class="option-letter">C</span>
+          The subdirectory file instructions, because specific local rules override general root rules.
+        </button>
+        <button class="option" onclick="answer(this,'q2','wrong')" data-q="q2">
+          <span class="option-letter">D</span>
+          The agent will choose randomly between the two files.
+        </button>
+      </div>
+      <div class="feedback correct" id="q2-correct">
+        🎉 Correct! In hierarchical file setups, specific instructions in nested folders override conflicting rules from parent directories.
+      </div>
+      <div class="feedback wrong" id="q2-wrong">
+        ❌ Incorrect. The agent will not crash or choose randomly. The rule of specificity means subdirectory instructions override parent ones.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <div class="quiz-number">Question 3 of 3</div>
+      <p>What is the best way to manage AGENTS.md files in a monorepo?</p>
+      <div class="options">
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">A</span>
+          Put all instructions for all apps in the root file to keep everything in one place.
+        </button>
+        <button class="option" onclick="answer(this,'q3','correct')" data-q="q3">
+          <span class="option-letter">B</span>
+          Put global rules in the root file and specific build and styling rules in each app subdirectory.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">C</span>
+          Copy and paste the exact same file into every directory in the project.
+        </button>
+        <button class="option" onclick="answer(this,'q3','wrong')" data-q="q3">
+          <span class="option-letter">D</span>
+          Avoid using rules in subdirectories entirely.
+        </button>
+      </div>
+      <div class="feedback correct" id="q3-correct">
+        🎉 Correct! Storing global rules at the root and specific instructions in subdirectory files keeps the workspace clean and keeps files small.
+      </div>
+      <div class="feedback wrong" id="q3-wrong">
+        ❌ Incorrect. Putting all instructions in the root makes it messy, and copying the exact same file is hard to maintain. Storing global rules at the root and app-specific rules in subdirectories is the best approach.
+      </div>
+    </div>
+
+    <div id="score-display">
+      <div class="score-big" id="scoreNum">3/3</div>
+      <p id="scoreMsg">Great work! You have finished Lesson 4.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navigation-row">
+    <div>
+      <a href="0003-writing-your-first-agents-md.html" class="btn btn-secondary">&larr; Lesson 3</a>
+      <a href="../reference/agents-md-cheat-sheet.html" class="btn btn-secondary">Cheat Sheet</a>
+    </div>
+    <div class="nav-group">
+      <button class="btn btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
+      <a href="0005-advanced-style-and-testing.html" class="btn">Lesson 5 &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ASK AGENT -->
+  <div class="ask-agent">
+    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
+    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help, 54b4rn4th.</p>
+  </div>
+
+</main>
+
+<script>
+  let scores = {};
+  let totalAnswered = 0;
+
+  function answer(el, qId, result) {
+    if (scores[qId] !== undefined) return;
+    scores[qId] = result === 'correct' ? 1 : 0;
+    totalAnswered++;
+
+    const allOptions = document.querySelectorAll(`[data-q="${qId}"]`);
+    allOptions.forEach(opt => {
+      if (opt !== el) opt.classList.add('dimmed');
+    });
+
+    el.classList.add(result);
+    document.getElementById(`${qId}-${result}`).classList.add('show');
+
+    // Update progress bar (starts at 50%, increases to 100% after 3 answers)
+    const bar = document.getElementById('progressBar');
+    const newProgress = Math.min(100, 50 + Math.round(totalAnswered * 16.67));
+    bar.style.width = newProgress + '%';
+
+    if (totalAnswered === 3) showScore();
+  }
+
+  function showScore() {
+    const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+    const display = document.getElementById('score-display');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = total + '/3';
+    if (total === 3) msg.textContent = 'Perfect score! You now understand monorepos and hierarchical rules, 54b4rn4th!';
+    else if (total >= 2) msg.textContent = 'Good effort, 54b4rn4th. Go over the questions you missed to lock in the knowledge.';
+    else msg.textContent = 'Let us review the concepts of nested files and directory tree searching, 54b4rn4th. You will get it!';
+
+    display.classList.add('show');
+    display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

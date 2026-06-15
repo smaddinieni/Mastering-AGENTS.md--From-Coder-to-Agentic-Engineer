@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGENTS.md Quick Reference</title>
+  <meta name="description" content="A concise cheat sheet for writing effective AGENTS.md files. Covers structure, sections, dos and don'ts, and monorepo patterns." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f9fc;
+      --surface2: #f0f2f8;
+      --border: #e2e6f0;
+      --text: #1a1d2e;
+      --muted: #5a6080;
+      --accent: #5b4ef8;
+      --accent-soft: #ede9ff;
+      --green: #16a34a;
+      --green-soft: #dcfce7;
+      --red: #dc2626;
+      --red-soft: #fee2e2;
+      --yellow: #d97706;
+      --yellow-soft: #fef3c7;
+      --code-bg: #1e2030;
+      --code-fg: #c8d3f5;
+      --radius: 8px;
+    }
+    @media print {
+      body { font-size: 11px; }
+      .no-print { display: none; }
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .header-title h1 { font-size: 24px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+    .header-title p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .header-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 680px) { .grid-2 { grid-template-columns: 1fr; } }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 680px) { .grid-3 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 16px 0 8px;
+      letter-spacing: -0.01em;
+    }
+    ul, ol { padding-left: 0; list-style: none; }
+    li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0;
+    }
+    li .bullet { flex-shrink: 0; font-weight: 700; }
+    li .bullet.go { color: var(--green); }
+    li .bullet.no { color: var(--red); }
+    li .bullet.dot { color: var(--accent); }
+    strong { color: var(--text); font-weight: 600; }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .code-block {
+      background: var(--code-bg);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin: 8px 0;
+    }
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      line-height: 1.9;
+      color: var(--code-fg);
+      overflow-x: auto;
+    }
+    .hl-heading { color: #82aaff; font-weight: 700; }
+    .hl-bullet { color: #c3e88d; }
+    .hl-code { color: #ffcb6b; }
+    .hl-comment { color: #4a5480; }
+    .hl-string { color: #c3e88d; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 8px 0;
+    }
+    th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    td:first-child { color: var(--text); font-weight: 500; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .badge-required { background: var(--red-soft); color: var(--red); }
+    .badge-optional { background: var(--surface2); color: var(--muted); }
+    .badge-pro { background: var(--accent-soft); color: var(--accent); }
+    .rule-row {
+      display: flex;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      align-items: flex-start;
+    }
+    .rule-row:last-child { border-bottom: none; }
+    .rule-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .rule-text { color: var(--muted); }
+    .rule-text strong { color: var(--text); display: block; }
+    .footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .lesson-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>AGENTS.md Quick Reference</h1>
+    <p>The cheat sheet. Everything you need to write effective agent instructions.</p>
+  </div>
+  <div class="header-meta">
+    Part of the AGENTS.md beginner-to-pro course<br/>
+    Covers Lessons 1-7 &bull; Updated June 2026
+  </div>
+</header>
+
+<!-- ROW 1 -->
+<div class="grid-2">
+
+  <!-- The Basics -->
+  <div class="card">
+    <div class="card-title">&#128196; The Basics</div>
+    <ul>
+      <li><span class="bullet dot">&#10022;</span><span><strong>What it is:</strong> A README for AI agents. Plain Markdown. No special syntax.</span></li>
+      <li><span class="bullet dot">&#10022;</span><span><strong>Where it goes:</strong> Root of the repository, same level as README.md</span></li>
+      <li><span class="bullet dot">&#10022;</span><span><strong>When it is read:</strong> Before the agent does anything in your project</span></li>
+      <li><span class="bullet dot">&#10022;</span><span><strong>Who reads it:</strong> Antigravity, Cursor, Copilot, Claude Code, Codex, Jules, Aider, Windsurf, Zed, Devin, Goose, and more</span></li>
+      <li><span class="bullet dot">&#10022;</span><span><strong>Format:</strong> Standard Markdown headings (<code>##</code>) and bullet points</span></li>
+    </ul>
+  </div>
+
+  <!-- Core Sections -->
+  <div class="card">
+    <div class="card-title">&#128193; Core Sections</div>
+    <table>
+      <thead>
+        <tr><th>Section</th><th>Priority</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Project Overview</td><td><span class="badge badge-optional">Optional</span></td></tr>
+        <tr><td>Build &amp; Test Commands</td><td><span class="badge badge-required">Include</span></td></tr>
+        <tr><td>Code Style Guidelines</td><td><span class="badge badge-required">Include</span></td></tr>
+        <tr><td>Constraints / Off-limits</td><td><span class="badge badge-required">Include</span></td></tr>
+        <tr><td>Testing Strategy</td><td><span class="badge badge-optional">Optional</span></td></tr>
+        <tr><td>PR / Commit Guidelines</td><td><span class="badge badge-optional">Optional</span></td></tr>
+        <tr><td>Agent Roles (multi-agent)</td><td><span class="badge badge-pro">Pro</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FULL TEMPLATE -->
+<div class="card" style="margin-bottom:16px">
+  <div class="card-title">&#128295; Full Template (copy and adapt)</div>
+  <div class="code-block">
+    <pre><span class="hl-heading"># AGENTS.md</span>
+
+<span class="hl-comment"># Project Overview (optional - only if not obvious from codebase)</span>
+<span class="hl-comment"># This is a [language] project using [framework]. [One sentence about what it does.]</span>
+
+<span class="hl-heading">## Build &amp; Test</span>
+<span class="hl-bullet">-</span> Install: <span class="hl-code">`npm install`</span>
+<span class="hl-bullet">-</span> Dev server: <span class="hl-code">`npm run dev`</span>
+<span class="hl-bullet">-</span> Test: <span class="hl-code">`npm test`</span>
+<span class="hl-bullet">-</span> Lint: <span class="hl-code">`npm run lint`</span>
+<span class="hl-bullet">-</span> Always run <span class="hl-code">`npm run lint`</span> before submitting changes.
+
+<span class="hl-heading">## Code Style</span>
+<span class="hl-bullet">-</span> [Language] - [version if relevant]
+<span class="hl-bullet">-</span> [Quote style, semicolons, tabs vs spaces - only if not enforced by linter]
+<span class="hl-bullet">-</span> [Naming conventions - camelCase, PascalCase etc.]
+<span class="hl-bullet">-</span> [Any pattern preferences - functional, OOP, etc.]
+
+<span class="hl-heading">## Constraints</span>
+<span class="hl-bullet">-</span> Never modify <span class="hl-code">/vendor/</span> or <span class="hl-code">/generated/</span>
+<span class="hl-bullet">-</span> Do not touch secrets or .env files. Alert me if a new secret is needed.
+<span class="hl-bullet">-</span> [Any other protected paths or files]
+
+<span class="hl-heading">## Testing</span>
+<span class="hl-bullet">-</span> Framework: [Jest / Vitest / pytest / etc.]
+<span class="hl-bullet">-</span> Test files live in <span class="hl-code">__tests__/</span> alongside the module they test
+<span class="hl-bullet">-</span> Mock strategy: [how you prefer mocking - vi.mock, jest.mock, etc.]
+
+<span class="hl-heading">## Commits &amp; PRs</span>
+<span class="hl-bullet">-</span> Commit message format: <span class="hl-code">type(scope): message</span> [Conventional Commits]
+<span class="hl-bullet">-</span> Keep PRs focused - one logical change per PR</pre>
+  </div>
+</div>
+
+<!-- ROW 2 -->
+<div class="grid-2">
+
+  <!-- Do / Don't -->
+  <div class="card">
+    <div class="card-title">&#9989; Do This / &#10060; Not This</div>
+    <div class="rule-row">
+      <div class="rule-icon">&#9989;</div>
+      <div class="rule-text"><strong>Use exact runnable commands</strong> <code>`pnpm test`</code> not "run the tests"</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#9989;</div>
+      <div class="rule-text"><strong>Only write what agents cannot infer</strong> from the codebase itself</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#9989;</div>
+      <div class="rule-text"><strong>Human-curated instructions</strong> - write it yourself, not auto-generated</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#9989;</div>
+      <div class="rule-text"><strong>Keep it short</strong> - if it's longer than a screen, trim it</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#9989;</div>
+      <div class="rule-text"><strong>Update it when things change</strong> - stale AGENTS.md is worse than none</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#10060;</div>
+      <div class="rule-text"><strong>Duplicate linter rules</strong> - if ESLint enforces it, don't repeat it</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#10060;</div>
+      <div class="rule-text"><strong>Redefine persona</strong> - "You are an expert developer" is off-scope</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#10060;</div>
+      <div class="rule-text"><strong>Write a wall of text</strong> - agents read instructions, not essays</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">&#10060;</div>
+      <div class="rule-text"><strong>Auto-generate it with AI</strong> - hand-curated beats AI-generated</div>
+    </div>
+  </div>
+
+  <!-- Monorepo Pattern -->
+  <div class="card">
+    <div class="card-title">&#127968; Monorepo Hierarchy</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px">In a monorepo, agents use the AGENTS.md closest to where they're working.</p>
+    <div class="code-block">
+      <pre><span class="hl-comment">my-monorepo/</span>
+<span class="hl-bullet">&#9500;</span> AGENTS.md          <span class="hl-comment"># root: global rules</span>
+<span class="hl-bullet">&#9500;</span> packages/
+<span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9500;</span> api/
+<span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9492;</span> AGENTS.md   <span class="hl-comment"># api-specific</span>
+<span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9500;</span> web/
+<span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9492;</span> AGENTS.md   <span class="hl-comment"># web-specific</span>
+<span class="hl-bullet">&#9474;</span>  <span class="hl-bullet">&#9492;</span> shared/
+<span class="hl-bullet">&#9492;</span> README.md</pre>
+    </div>
+    <ul style="margin-top:8px">
+      <li><span class="bullet dot">&#10022;</span><span style="font-size:12px">Root AGENTS.md = global rules for the whole repo</span></li>
+      <li><span class="bullet dot">&#10022;</span><span style="font-size:12px">Subdirectory AGENTS.md = overrides or adds rules for that package</span></li>
+      <li><span class="bullet dot">&#10022;</span><span style="font-size:12px">Subdirectory rules win when they conflict with root rules</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ROW 3 - Pro patterns -->
+<div class="grid-3">
+
+  <div class="card">
+    <div class="card-title">&#129302; Multi-Agent Roles</div>
+    <div class="code-block">
+      <pre><span class="hl-heading">## Agent Roles</span>
+
+<span class="hl-heading">### Orchestrator</span>
+<span class="hl-bullet">-</span> Plans tasks, does not
+  write code directly
+<span class="hl-bullet">-</span> Delegates to workers
+
+<span class="hl-heading">### Worker agents</span>
+<span class="hl-bullet">-</span> Each has a scoped
+  AGENTS.md in their
+  subdirectory
+<span class="hl-bullet">-</span> Only touch files in
+  their domain</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128203; The Meta-Tip</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Found yourself correcting your agent again on the same thing?</p>
+    <p style="font-size:13px;color:var(--text);font-style:italic;border-left:3px solid var(--accent);padding-left:10px;margin:8px 0">"Please update AGENTS.md with this rule so you remember it next time."</p>
+    <p style="font-size:12px;color:var(--muted)">This is the fastest way to evolve your AGENTS.md over time. Let every correction become a permanent rule.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#9888;&#65039; Common Mistakes</div>
+    <ul>
+      <li><span class="bullet no">&#10007;</span><span><strong>Bloating it</strong> - adding every possible rule. Long = ignored.</span></li>
+      <li><span class="bullet no">&#10007;</span><span><strong>Generic tips</strong> - "write clean code". Agents already know this.</span></li>
+      <li><span class="bullet no">&#10007;</span><span><strong>Stale commands</strong> - build command changed, AGENTS.md didn't.</span></li>
+      <li><span class="bullet no">&#10007;</span><span><strong>Missing constraints</strong> - not saying what NOT to touch. Most critical omission.</span></li>
+      <li><span class="bullet no">&#10007;</span><span><strong>One monolithic file</strong> - in monorepos, use the hierarchy.</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Section decision flowchart (text) -->
+<div class="card" style="margin-bottom:16px">
+  <div class="card-title">&#9736; Should This Go in AGENTS.md? Decision Guide</div>
+  <table>
+    <thead>
+      <tr><th>The thing you want to add</th><th>Put in AGENTS.md?</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Exact test command</td><td><span class="badge badge-required">Yes</span></td><td>Agents can't reliably infer this</td></tr>
+      <tr><td>Linting rule already in .eslintrc</td><td><span class="badge badge-optional">No</span></td><td>Already enforced by tooling - redundant</td></tr>
+      <tr><td>Folder the agent must never touch</td><td><span class="badge badge-required">Yes</span></td><td>Critical constraint - always state explicitly</td></tr>
+      <tr><td>What this project does (feature description)</td><td><span class="badge badge-optional">No</span></td><td>Belongs in README.md for humans</td></tr>
+      <tr><td>Naming convention not enforced by linter</td><td><span class="badge badge-required">Yes</span></td><td>Agent can't infer custom conventions</td></tr>
+      <tr><td>How to mock external APIs in tests</td><td><span class="badge badge-required">Yes</span></td><td>Non-obvious, project-specific knowledge</td></tr>
+      <tr><td>"You are an expert developer"</td><td><span class="badge badge-optional">No</span></td><td>Persona redefinition - off-scope for AGENTS.md</td></tr>
+      <tr><td>PR title format (e.g. Conventional Commits)</td><td><span class="badge badge-optional">Optional</span></td><td>Only if not documented in CONTRIBUTING.md already</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <span>
+    &#128218; Source: <a class="lesson-link" href="https://agents.md">agents.md</a> &bull;
+    <a class="lesson-link" href="https://augmentcode.com">Augment Code research</a>
+  </span>
+  <span>&#128640; Lesson 1: <em>What is AGENTS.md</em> &bull; Next: Lesson 2: Anatomy Deep Dive</span>
+</div>
+
+</body>
+</html>
