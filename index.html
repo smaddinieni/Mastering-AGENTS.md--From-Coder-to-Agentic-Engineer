@@ -99,6 +99,37 @@
         justify-content: center;
       }
     }
+    footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-weight: 500;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    @media (max-width: 600px) {
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -270,6 +301,14 @@
       <span class="agent-chip">&#128039; Goose</span>
     </div>
   </div>
+
+  <footer>
+    <span>Mastering AGENTS.md &bull; Learner Guide</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/sabarnathmaddinieni/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://x.com/SabarnathX" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+    </div>
+  </footer>
 
 </main>
 

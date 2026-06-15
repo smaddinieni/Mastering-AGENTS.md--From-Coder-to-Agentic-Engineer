@@ -7,26 +7,30 @@
   <meta name="description" content="A concise cheat sheet for writing effective AGENTS.md files. Covers structure, sections, dos and don'ts, and monorepo patterns." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #ffffff;
-      --surface: #f8f9fc;
-      --surface2: #f0f2f8;
-      --border: #e2e6f0;
-      --text: #1a1d2e;
-      --muted: #5a6080;
-      --accent: #5b4ef8;
-      --accent-soft: #ede9ff;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #4f46e5;
+      --accent-soft: #e0e7ff;
+      --accent-glow: rgba(79, 70, 229, 0.06);
       --green: #16a34a;
       --green-soft: #dcfce7;
       --red: #dc2626;
       --red-soft: #fee2e2;
-      --yellow: #d97706;
-      --yellow-soft: #fef3c7;
+      --yellow: #ca8a04;
+      --yellow-soft: #fef9c3;
       --code-bg: #1e2030;
       --code-fg: #c8d3f5;
-      --radius: 8px;
+      --radius: 12px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
     }
     @media print {
       body { font-size: 11px; }
@@ -42,7 +46,8 @@
       line-height: 1.6;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 20px 60px;
+      padding: 64px 20px 60px;
+      position: relative;
     }
     header {
       display: flex;
@@ -183,22 +188,63 @@
     .rule-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
     .rule-text { color: var(--muted); }
     .rule-text strong { color: var(--text); display: block; }
+    .home-btn {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      z-index: 10;
+    }
+    .home-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+      transform: translateY(-1px);
+    }
     .footer {
-      margin-top: 28px;
-      padding-top: 16px;
+      margin-top: 40px;
+      padding-top: 20px;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
-      font-size: 11px;
+      gap: 12px;
+      font-size: 13px;
       color: var(--muted);
     }
-    .lesson-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+    .lesson-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .lesson-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+
+<a href="../index.html" class="home-btn">&larr; Home</a>
 
 <header>
   <div class="header-title">
@@ -416,11 +462,11 @@
 </div>
 
 <div class="footer">
-  <span>
-    &#128218; Source: <a class="lesson-link" href="https://agents.md">agents.md</a> &bull;
-    <a class="lesson-link" href="https://augmentcode.com">Augment Code research</a>
-  </span>
-  <span>&#128640; Lesson 1: <em>What is AGENTS.md</em> &bull; Next: Lesson 2: Anatomy Deep Dive</span>
+  <span>Mastering AGENTS.md &bull; Quick Reference Cheat Sheet</span>
+  <div class="footer-links">
+    <a class="lesson-link" href="https://www.linkedin.com/in/sabarnathmaddinieni/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a class="lesson-link" href="https://x.com/SabarnathX" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+  </div>
 </div>
 
 </body>
