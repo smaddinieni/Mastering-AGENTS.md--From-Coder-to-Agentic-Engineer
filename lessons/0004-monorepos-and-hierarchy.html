@@ -15,7 +15,7 @@
 <header>
   <div class="lesson-badge"><span class="dot"></span>Lesson 4 of 7 - Intermediate Track</div>
   <h1>Lesson 4: Monorepos and Hierarchy</h1>
-  <p class="subtitle">Understand how AI agents search the directory tree for rules, and how nested AGENTS.md files override root instructions, tailored for 54b4rn4th.</p>
+  <p class="subtitle">Understand how AI agents search the directory tree for rules, and how nested AGENTS.md files override root instructions, tailored for you.</p>
   <div class="meta-row">
     <span class="meta-chip">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -45,7 +45,7 @@
     <div class="section-label">01 // First Principles</div>
     <h2>How Agents Search the Directory Tree</h2>
     <p>
-      Hello, 54b4rn4th. When an AI agent performs tasks in your workspace, it needs to find context and rules. It does not just look in the workspace root folder. It searches your directory structure dynamically.
+      Hello. When an AI agent performs tasks in your workspace, it needs to find context and rules. It does not just look in the workspace root folder. It searches your directory structure dynamically.
     </p>
     <p>
       Let us explain this using first principles. An agent always works from a current directory. When it starts a task or runs a command:
@@ -133,7 +133,7 @@
         <div class="card-tag">✅ Clean Hierarchy</div>
         <h4>How to structure rules</h4>
         <ul>
-          <li>Put global rules in the root file (such as your user name 54b4rn4th, styling principles, or off-limit paths).</li>
+          <li>Put global rules in the root file (such as your username, styling principles, or off-limit paths).</li>
           <li>Put service-specific build and test commands in each service subdirectory.</li>
           <li>Define framework-specific style guides (like React vs NestJS) in the subdirectory where they are used.</li>
         </ul>
@@ -158,7 +158,7 @@
       <div class="quiz-icon">⚡</div>
       <div>
         <div class="quiz-title">Checkpoint Quiz</div>
-        <div class="quiz-subtitle">Answer the 3 questions below to test your understanding, 54b4rn4th.</div>
+        <div class="quiz-subtitle">Answer the 3 questions below to test your understanding.</div>
       </div>
     </div>
 
@@ -270,12 +270,6 @@
     </div>
   </div>
 
-  <!-- ASK AGENT -->
-  <div class="ask-agent">
-    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
-    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help, 54b4rn4th.</p>
-  </div>
-
 </main>
 
 <script>
@@ -310,9 +304,9 @@
     const msg = document.getElementById('scoreMsg');
 
     num.textContent = total + '/3';
-    if (total === 3) msg.textContent = 'Perfect score! You now understand monorepos and hierarchical rules, 54b4rn4th!';
-    else if (total >= 2) msg.textContent = 'Good effort, 54b4rn4th. Go over the questions you missed to lock in the knowledge.';
-    else msg.textContent = 'Let us review the concepts of nested files and directory tree searching, 54b4rn4th. You will get it!';
+    if (total === 3) msg.textContent = 'Perfect score! You now understand monorepos and hierarchical rules!';
+    else if (total >= 2) msg.textContent = 'Good effort. Go over the questions you missed to lock in the knowledge.';
+    else msg.textContent = 'Let us review the concepts of nested files and directory tree searching. You will get it!';
 
     display.classList.add('show');
     display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

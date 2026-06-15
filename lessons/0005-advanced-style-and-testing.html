@@ -15,7 +15,7 @@
 <header>
   <div class="lesson-badge"><span class="dot"></span>Lesson 5 of 7 - Advanced Track</div>
   <h1>Lesson 5: Advanced Style and Testing Rules</h1>
-  <p class="subtitle">A guide for 54b4rn4th to control agent style, write tests, handle mock files, and set commit conventions.</p>
+  <p class="subtitle">A guide for you to control agent style, write tests, handle mock files, and set commit conventions.</p>
   <div class="meta-row">
     <span class="meta-chip">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -45,7 +45,7 @@
     <div class="section-label">01 // First Principles</div>
     <h2>Why Advanced Rules Matter</h2>
     <p>
-      Hello, 54b4rn4th. To master agent coordination, we must look at how an agent reads instructions. An agent is a tool that writes code based on context. It knows basic programming syntax, but it does not know your personal goals or design decisions.
+      Hello. To master agent coordination, we must look at how an agent reads instructions. An agent is a tool that writes code based on context. It knows basic programming syntax, but it does not know your personal goals or design decisions.
     </p>
     <p>
       Many developers think that a code linter is enough to keep a codebase clean. This is false. A linter checks basic syntax formatting, like missing semicolons or spaces. A linter cannot check if a test matches your mock files. It cannot check if the agent selected a bad library. It cannot check if a git commit message is clear.
@@ -126,7 +126,7 @@
     <div class="callout tip">
       <div class="callout-icon">🧪</div>
       <div class="callout-body">
-        <strong>Action for 54b4rn4th:</strong>
+        <strong>Action for you:</strong>
         <p>Tell the agent exactly what to test. For example, state that every new utility function must have a unit test file in the same folder as the utility file.</p>
       </div>
     </div>
@@ -252,7 +252,7 @@ PR descriptions must include:
     <!-- Q1 -->
     <div class="quiz-question" id="q1">
       <div class="quiz-number">Question 1 of 3</div>
-      <p>Hello, 54b4rn4th. Why do we need custom style rules if we already have a code linter?</p>
+      <p>Hello. Why do we need custom style rules if we already have a code linter?</p>
       <div class="options">
         <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
           <span class="option-letter">A</span>
@@ -356,12 +356,6 @@ PR descriptions must include:
     </div>
   </div>
 
-  <!-- ASK AGENT -->
-  <div class="ask-agent">
-    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
-    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help.</p>
-  </div>
-
 </main>
 
 <script>
@@ -398,9 +392,9 @@ PR descriptions must include:
     const msg = document.getElementById('scoreMsg');
 
     num.textContent = total + '/3';
-    if (total === 3) msg.textContent = 'Perfect score, 54b4rn4th! You have mastered advanced style and testing rules!';
-    else if (total >= 2) msg.textContent = 'Good work, 54b4rn4th. You understand most of the concepts. Review the one you missed.';
-    else msg.textContent = 'Let us try again, 54b4rn4th. Review the sections above and test your knowledge again.';
+    if (total === 3) msg.textContent = 'Perfect score! You have mastered advanced style and testing rules!';
+    else if (total >= 2) msg.textContent = 'Good work. You understand most of the concepts. Review the one you missed.';
+    else msg.textContent = 'Let us try again. Review the sections above and test your knowledge again.';
 
     display.classList.add('show');
     display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

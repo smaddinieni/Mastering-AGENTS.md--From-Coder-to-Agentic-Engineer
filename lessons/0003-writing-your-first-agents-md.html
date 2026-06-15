@@ -13,9 +13,10 @@
 <body>
 
 <header>
+  <a href="../index.html" class="home-btn">&larr; Home</a>
   <div class="lesson-badge"><span class="dot"></span>Lesson 3 of 7 - Beginner Track</div>
   <h1>Lesson 3: Writing Your First AGENTS.md File</h1>
-  <p class="subtitle">A step-by-step hands-on guide for 54b4rn4th to build an AGENTS.md file from scratch in any codebase.</p>
+  <p class="subtitle">A step-by-step hands-on guide for you to build an AGENTS.md file from scratch in any codebase.</p>
   <div class="meta-row">
     <span class="meta-chip">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -45,7 +46,7 @@
     <div class="section-label">01 // First Principles</div>
     <h2>How an Agent Sees Your Code</h2>
     <p>
-      Hello, 54b4rn4th. To build a great AGENTS.md file, you must first understand how an AI agent operates. An AI agent is a program that reads files, decides on actions, and runs commands. It does not have human memory or project context when it starts a new session. It only knows what is in the codebase.
+      Hello, User. To build a great AGENTS.md file, you must first understand how an AI agent operates. An AI agent is a program that reads files, decides on actions, and runs commands. It does not have human memory or project context when it starts a new session. It only knows what is in the codebase.
     </p>
     <p>
       If you do not write down your instructions, the agent must guess. It might use the wrong tool, change the wrong files, or write code in a style you do not want. We write the AGENTS.md file to stop this guessing.
@@ -76,7 +77,7 @@
     <div class="callout tip">
       <div class="callout-icon">⚡</div>
       <div class="callout-body">
-        <strong>Action for 54b4rn4th:</strong>
+        <strong>Action for you:</strong>
         <p>Run the test or build command in your terminal before you write it down. Make sure it runs to completion with no errors. If the command fails for you, it will fail for the agent too.</p>
       </div>
     </div>
@@ -239,7 +240,7 @@ Do NOT read or modify any files in the following folders:
     <!-- Q1 -->
     <div class="quiz-question" id="q1">
       <div class="quiz-number">Question 1 of 3</div>
-      <p>Hello, 54b4rn4th. What is the most basic truth about how an AI agent gets its instructions?</p>
+      <p>Hello. What is the most basic truth about how an AI agent gets its instructions?</p>
       <div class="options">
         <button class="option" onclick="answer(this,'q1','wrong')" data-q="q1">
           <span class="option-letter">A</span>
@@ -344,12 +345,6 @@ Do NOT read or modify any files in the following folders:
     </div>
   </div>
 
-  <!-- ASK AGENT -->
-  <div class="ask-agent">
-    <p>🤖 <strong>Ask your agent anything</strong> about this lesson</p>
-    <p>Feel free to ask followup questions in your chat pane. Your teacher is here to help.</p>
-  </div>
-
 </main>
 
 <script>
@@ -383,9 +378,9 @@ Do NOT read or modify any files in the following folders:
     const msg = document.getElementById('scoreMsg');
 
     num.textContent = total + '/3';
-    if (total === 3) msg.textContent = 'Perfect score! You are ready to write your first AGENTS.md file, 54b4rn4th!';
-    else if (total >= 2) msg.textContent = 'Good job, 54b4rn4th. Go over the questions you missed and try editing your first AGENTS.md.';
-    else msg.textContent = 'Let us review the steps again, 54b4rn4th. You will get it!';
+    if (total === 3) msg.textContent = 'Perfect score! You are ready to write your first AGENTS.md file!';
+    else if (total >= 2) msg.textContent = 'Good job. Go over the questions you missed and try editing your first AGENTS.md.';
+    else msg.textContent = 'Let us review the steps again. You will get it!';
 
     display.classList.add('show');
     display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
