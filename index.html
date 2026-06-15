@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mastering AGENTS.md: From Coder to Agentic Engineer</title>
+  <meta name="description" content="A complete 7-part course to design, build, and optimize machine-readable context files for AI coding agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="lessons/style.css" />
+  <style>
+    .course-intro {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .course-intro h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .lessons-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .lesson-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .lesson-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .lesson-info {
+      flex: 1;
+    }
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .lesson-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .lesson-time {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .lesson-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .lesson-desc {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .lesson-action {
+      flex-shrink: 0;
+    }
+    @media (max-width: 650px) {
+      .lesson-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .lesson-action {
+        width: 100%;
+      }
+      .lesson-action .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="lesson-badge"><span class="dot"></span>Complete Course &mdash; Beginner to Pro</div>
+  <h1>Mastering AGENTS.md</h1>
+  <p class="subtitle">From Coder to Agentic Engineer</p>
+  <div class="meta-row">
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      7 Lessons
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Interactive Quizzes
+    </span>
+    <span class="meta-chip">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Self-Paced
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <div class="course-intro">
+    <h2>Welcome, 54b4rn4th</h2>
+    <p>
+      Traditional software engineers write README files for other humans. Agentic engineers write AGENTS.md files to program the behavior of AI coding agents. 
+    </p>
+    <p>
+      This course teaches you how to write machine-readable context files that guide coding agents (like Antigravity, Cursor, and Claude Code) to write code correctly on their first try.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Course Curriculum</div>
+    <h2>Start Learning</h2>
+    
+    <div class="lessons-list">
+      
+      <!-- Lesson 1 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 1</span>
+            <span class="lesson-time">~10 min read</span>
+          </div>
+          <div class="lesson-title">What is AGENTS.md, and Why Does It Exist?</div>
+          <p class="lesson-desc">Understand the friction of AI context loss and why machine-specific documentation is the solution.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0001-what-is-agents-md.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 2 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 2</span>
+            <span class="lesson-time">~12 min read</span>
+          </div>
+          <div class="lesson-title">Anatomy of AGENTS.md - Every Section Explained</div>
+          <p class="lesson-desc">Learn the three pillars of AGENTS.md and how to focus only on rules the agent cannot find on its own.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0002-anatomy-of-agents-md.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 3 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 3</span>
+            <span class="lesson-time">~15 min read</span>
+          </div>
+          <div class="lesson-title">Writing Your First AGENTS.md File</div>
+          <p class="lesson-desc">Step-by-step guide to writing your first custom instructions, build/test commands, and protected paths.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0003-writing-your-first-agents-md.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 4 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 4</span>
+            <span class="lesson-time">~10 min read</span>
+          </div>
+          <div class="lesson-title">Monorepos and Hierarchy</div>
+          <p class="lesson-desc">Learn how agents search directories for instructions and how nested rules override root files.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0004-monorepos-and-hierarchy.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 5 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 5</span>
+            <span class="lesson-time">~15 min read</span>
+          </div>
+          <div class="lesson-title">Advanced Style and Testing Rules</div>
+          <p class="lesson-desc">Write guidelines that automatic linters cannot catch, define testing policies, and mock rules.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0005-advanced-style-and-testing.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 6 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 6</span>
+            <span class="lesson-time">~12 min read</span>
+          </div>
+          <div class="lesson-title">Multi-Agent Orchestration</div>
+          <p class="lesson-desc">Coordinate multiple coding agents using scoped folder hierarchies and specific role directives.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0006-multi-agent-orchestration.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Lesson 7 -->
+      <div class="lesson-card">
+        <div class="lesson-info">
+          <div class="lesson-meta">
+            <span class="lesson-num">Lesson 7</span>
+            <span class="lesson-time">~10 min read</span>
+          </div>
+          <div class="lesson-title">Maintenance and Best Practices</div>
+          <p class="lesson-desc">Learn how to prevent stale instructions, keep the file concise, and leverage the meta-tip.</p>
+        </div>
+        <div class="lesson-action">
+          <a href="lessons/0007-maintenance-and-best-practices.html" class="btn">Start Lesson &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="section">
+    <div class="section-label">Compatible Tools</div>
+    <h2>Supported AI Coding Agents</h2>
+    <p>The instructions you learn in this course work with any AI code developer that reads project context files:</p>
+    <div class="agent-grid">
+      <span class="agent-chip">&#129302; Antigravity</span>
+      <span class="agent-chip">&#9654; Cursor</span>
+      <span class="agent-chip">&#129351; GitHub Copilot</span>
+      <span class="agent-chip">&#127760; Claude Code</span>
+      <span class="agent-chip">&#128301; OpenAI Codex</span>
+      <span class="agent-chip">&#127757; Google Jules</span>
+      <span class="agent-chip">&#128187; VS Code Copilot</span>
+      <span class="agent-chip">&#128640; Windsurf</span>
+      <span class="agent-chip">&#127381; Aider</span>
+      <span class="agent-chip">&#129461; Devin</span>
+      <span class="agent-chip">&#9889; Zed</span>
+      <span class="agent-chip">&#128039; Goose</span>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
